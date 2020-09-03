@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DotNetCore3._1RestAPI.Options;
+using DotNetCore3._1RestAPI.Installers;
 
 namespace DotNetCore3._1RestAPI
 {
@@ -28,20 +29,7 @@ namespace DotNetCore3._1RestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<AppDbContext>();
-
-            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
-
-            services.AddSwaggerGen(x => {
-                x.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Example .NET Core 3.1 API", Version = "v1" });
-            });
-
-            // services.AddControllersWithViews(); // not included in demo as adds a bunch of things. Replaced with above AddMVC (similar to demo)
-            // services.AddRazorPages(); // not required for demo at this stage
+            services.InstallServicesInAssembly(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
