@@ -1,4 +1,5 @@
 ﻿using DotNetCore3._1RestAPI.Data;
+using DotNetCore3._1RestAPI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +18,8 @@ namespace DotNetCore3._1RestAPI.Installers
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AppDbContext>();
+
+            services.AddSingleton<IPostService, PostService>();
         }
 
     }

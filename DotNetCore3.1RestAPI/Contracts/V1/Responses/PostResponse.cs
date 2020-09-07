@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DotNetCore3._1RestAPI.Domain
+namespace DotNetCore3._1RestAPI.Contracts.V1.Responses
 {
-    public class Post
+    public class PostResponse
     {
         public Guid Id { get; set; }
-
-        public string Name { get; set; }
-
     }
 }
-
