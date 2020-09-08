@@ -56,5 +56,23 @@ namespace DotNetCore3._1RestAPI.Controllers
             return Created(locationUrl, response);
         }
 
+
+        [HttpPut(ApiRoutes.Posts.Update)]
+        public IActionResult Update([FromRoute] Guid postId, UpdatePostRequest request)
+        {
+            var post = new Post
+            {
+                Id = postId,
+                Name = request.Name
+            };
+
+            var updated = _postService.UpdatePost(post);
+
+            if (updated)
+                return Ok(post);
+
+            return NotFound();
+        }
+
     }
 }

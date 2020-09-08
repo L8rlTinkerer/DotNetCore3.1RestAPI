@@ -11,5 +11,7 @@ namespace DotNetCore3._1RestAPI.Services
         List<Post> GetPosts();
 
         Post GetPostById(Guid postId);
+
+        bool UpdatePost(Post postToUpdate);
     }
 }
